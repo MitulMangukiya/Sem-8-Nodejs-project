@@ -9,6 +9,7 @@ import list from './list';
 import edit from './edit';
 import single from './single';
 import deleteOne from './delete';
+import bulksave from './bulksave'
 
-export default [save,list,edit,single,deleteOne];
+export default [save,list,edit,single,deleteOne,bulksave];
 

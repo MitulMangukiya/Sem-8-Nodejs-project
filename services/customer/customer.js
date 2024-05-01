@@ -4,7 +4,7 @@
  *
  */
 
-const ObjectId = require("mongodb").ObjectID;
+const ObjectId = require("mongodb").ObjectId;
 import dbService from "../../utilities/dbService";
 import {
   encryptpassword,
@@ -100,7 +100,26 @@ export const getCustomer = async (req) => {
 
   let customerData = await dbService.findAllRecords("customerModel", {
     _id: userId,
+    isDeleted: false
   });
 
   return customerData;
 };
+
+//*********************** deletecustomer **************************//
+export const deletecustomer = async (req) => {
+  let where = {
+      // _id : req.body.id,
+      _id : ObjectId(req.user.userId)
+  };
+  let customerdata = await dbService.findOneAndUpdateRecord("customerModel", where,
+   { isDeleted: true });
+  return "customer data is deleted";
+}
+
+//*********************** addprofileImg **************************//
+
+export const addprofileImg = async (req) => {
+    let customerimg = await dbService.findOneAndUpdateRecord("customerModel",{_id:ObjectId(req.user.userId),isDeleted:false},{"profileImg":req.body.image});
+    return req.body
+}

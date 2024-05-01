@@ -11,6 +11,7 @@
      phone: { type: String },
      email: { type: String },
      password: { type: String },
+     profileImg: {type: String},
      loginToken: [
          {
              token: {

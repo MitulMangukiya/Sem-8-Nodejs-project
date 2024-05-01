@@ -10,8 +10,6 @@
  import { addProduct } from "../../../../services/product/saveproduct";
  const router = new Router();
  
-
-
 /**
  * @swagger
  * /api/v1/product/add:

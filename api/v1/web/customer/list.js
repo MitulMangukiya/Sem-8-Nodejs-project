@@ -39,8 +39,6 @@ const router = new Router();
  *      - bearerAuth: [] 
  */
 
- router.post('/getCustomer', decodeJwtTokenFn, commonResolver.bind({ modelService: getCustomer, isRequestValidateRequired: false,schemaValidate: {} }))
-
-
+ router.post('/getCustomer', decodeJwtTokenFn, commonResolver.bind({ modelService: getCustomer, isRequestValidateRequired: false}))
 
 export default router;

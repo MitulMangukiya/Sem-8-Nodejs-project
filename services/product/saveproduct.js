@@ -26,3 +26,30 @@ export const addProduct = async (req) => {
    return project;
 }
 };
+
+//********************** addbulkproduct *************************//
+
+export const addbulkproduct = async (req) =>{
+   let products = req.body;
+   
+   try {
+      for(let i=0;i<products.length;i++){
+         let project = await dbService.findOneRecord("productModel",{productName : products[i].productName, mainUserId : products[i].userId}); 
+         if(project){
+            let update={}
+            if(project.stockstatus == "outofstock"){
+               update.stockstatus="instock"
+               update.quantity += 1
+            }
+            await dbService.updateOneRecord("productModel",{_id : project._id},update)
+         }
+         else{
+            await dbService.createOneRecord("productModel",products[i]) 
+         }
+      }
+      return "product added successfully"
+   }
+   catch(error){
+      console.log("can't add products ===> ", error);
+   }
+}
