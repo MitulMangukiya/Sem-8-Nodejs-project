@@ -1,9 +1,3 @@
-/**
- * This is Contain Save router/api.
- * @author Sandip Vaghasiya
- *
- */
-
  import { Joi } from '../../../../utilities/schemaValidate'
  import { Router } from 'express';
  import commonResolver from '../../../../utilities/commonResolver'
@@ -14,7 +8,7 @@
 /**
  * @swagger
  * /api/v1/product/update:
- *  post:
+ *  patch:
  *   tags: ["Product"]
  *   summary: update product information.
  *   description: api used for update product information.
@@ -44,7 +38,7 @@
  *      - bearerAuth: [] 
  */
 
- router.post('/update', commonResolver.bind({ modelService: updateproduct, isRequestValidateRequired: false,  }))
+ router.patch('/update', commonResolver.bind({ modelService: updateproduct, isRequestValidateRequired: false,  }))
 
 
 export default router;

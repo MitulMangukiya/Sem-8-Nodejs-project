@@ -1,7 +1,6 @@
 /*
  * @file: index.js
  * @description: It's combine all customer routers.
- * @author: Sandip Vaghasiya
  */
 
 import saveCustomer from './save';
@@ -10,4 +9,4 @@ import list from './list';
 import deleteOne from './delete';
 import userprofile from './addprofileimg';
 
-export default [saveCustomer, login,list,deleteOne,userprofile];
+export default [saveCustomer,login,list,deleteOne,userprofile]

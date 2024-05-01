@@ -1,10 +1,3 @@
-/**
- * This is Contain Save router/api.
- * @author Sandip Vaghasiya
- *
- */
-
-
 import { Joi } from '../../../../utilities/schemaValidate'
 import { Router } from 'express';
 import commonResolver from '../../../../utilities/commonResolver'
@@ -15,7 +8,7 @@ const router = new Router();
 /**
  * @swagger
  * /api/v1/product/delete:
- *  post:
+ *  delete:
  *   tags: ["Product"]
  *   summary: delete product.
  *   description: api used for delete product information.

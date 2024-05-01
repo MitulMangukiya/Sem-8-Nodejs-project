@@ -1,17 +1,11 @@
-/*
- * @file: app.js
- * @description: It Contain server setup functions.
- * @author: Sandip Vaghasiya
- */
-
 import express from "express";
 import bodyParser from "body-parser";
 import cors from "cors";
 import path from "path";
 import swaggerUi from "swagger-ui-express";
-import db from "./db";
 import swaggerJsDocsWeb from "./config/swagger/swagger-config-web";
 import logger from "morgan";
+import db from './db'
 import { failAction } from "./utilities/response";
 require("dotenv").config({ path: ".env" });
 

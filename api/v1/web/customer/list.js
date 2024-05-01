@@ -1,7 +1,5 @@
 /**
  * This is Contain Save router/api.
- * @author Sandip Vaghasiya
- *
  */
 
  import { Joi } from '../../../../utilities/schemaValidate'
@@ -10,7 +8,6 @@
 import { getCustomer} from "../../../../services/customer/customer";
 import { decodeJwtTokenFn } from '../../../../utilities/universal';
 const router = new Router();
-
 
 /**
  * @swagger

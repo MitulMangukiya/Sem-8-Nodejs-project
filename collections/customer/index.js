@@ -1,8 +1,3 @@
-/**
- * This is the indexer for contractor model
- * @author Sandip Vaghasiya
- * @since Saturday, May 28, 2022
- */
  import mongoose from 'mongoose';
  const customerSchema = new mongoose.Schema({
      firstName: { type: String },

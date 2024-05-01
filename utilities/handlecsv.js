@@ -20,8 +20,11 @@ export const handleCsv = async (req, res, next) => {
                     let productName = [];
 
                     jsonArray.map((item) => {
-                        if (!productName.includes(item.productName)) {
-                            productName.push(item.productName);
+                        let checkproduct = item.productName.toLowerCase()
+                        // console.log(typeof(checkproduct))
+
+                        if (!productName.includes(checkproduct)) {
+                            productName.push(checkproduct);
                             uniqueProducts.push(item);
                         }
                     });

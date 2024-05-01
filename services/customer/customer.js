@@ -5,6 +5,7 @@
  */
 
 const ObjectId = require("mongodb").ObjectId;
+// import customer from "../../collections/customer";
 import dbService from "../../utilities/dbService";
 import {
   encryptpassword,
@@ -12,33 +13,33 @@ import {
   generateJwtTokenFn,
 } from "../../utilities/universal";
 
+
 /*************************** addCustomer ***************************/
 export const addCustomer = async (req) => {
-  console.log("req service =>", req.body);
+  console.log("req.body===>",req.body)
+
   const { email } = req.body;
   console.log("email =>", email);
   let customerData = await dbService.findOneRecord("customerModel", {
-    email: email,
-  });
-  console.log("customerData =>", customerData);
-  if (customerData) {
-    throw new Error("Email Address Already Exists!");
-  } else {
-    console.log("req.body.password =>", req.body.password);
-    let password = await encryptpassword(req.body.password);
-    console.log("encryptpassword  password =>", password);
-    console.log("still we have req.body.password =>", req.body.password);
-    req.body.password = password;
-    console.log("after we have req.body.password =>", req.body.password);
-    //let project = await customerModel.saveQuery(req.body);
-    let project = await dbService.createOneRecord("customerModel", req.body);
-    console.log("project data =>", project);
-
-    return project;
-  }
+      email: email,
+    });
+    console.log("customerData =>", customerData);
+    if (customerData) {
+        throw new Error("Email Address Already Exists!");
+    } else {
+        console.log("req.body.password =>", req.body.password);
+        let password = await encryptpassword(req.body.password);
+        console.log("encryptpassword  password =>", password);
+        console.log("still we have original password =>", req.body.password);
+        req.body.password = password;
+        console.log("after we have encrypted password =>", req.body.password);
+        let project = await dbService.createOneRecord("customerModel", req.body);
+      return project;
+    }
 };
 
-export const onLogin = async (req, res, next) => {
+//************************** Login *****************************//
+export const onLogin = async (req, res) => {
   const payload = req.body;
   console.log("payload==>", payload);
   let userData = await dbService.findOneRecord("customerModel", {
@@ -109,7 +110,6 @@ export const getCustomer = async (req) => {
 //*********************** deletecustomer **************************//
 export const deletecustomer = async (req) => {
   let where = {
-      // _id : req.body.id,
       _id : ObjectId(req.user.userId)
   };
   let customerdata = await dbService.findOneAndUpdateRecord("customerModel", where,
@@ -120,6 +120,15 @@ export const deletecustomer = async (req) => {
 //*********************** addprofileImg **************************//
 
 export const addprofileImg = async (req) => {
-    let customerimg = await dbService.findOneAndUpdateRecord("customerModel",{_id:ObjectId(req.user.userId),isDeleted:false},{"profileImg":req.body.image});
-    return req.body
+    let customerimg = await dbService.findOneAndUpdateRecord("customerModel",{
+      _id:ObjectId(req.user.userId),
+      isDeleted:false},
+      {"profileImg":req.body.image});
+    // return req.body
+    if(customerimg){
+      return req.body
+    }
+    else{
+      return 'Image not uploaded'
+    }
 }

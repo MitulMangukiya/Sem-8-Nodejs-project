@@ -10,17 +10,16 @@ import dbService from "../../utilities/dbService";
 import { paginationFn } from "../../utilities/pagination";
 
 /*************************** listproduct ***************************/
-export const listProduct = async (req) => {
+export const listProduct = async (req,res) => {
 
   let { page = 1, limit = 0 } = req.body;
 
   const { docLimit, noOfDocSkip } = paginationFn({ page, limit });
-  // let skip = page * limit - limit;
 
-  let count = await dbService.recordsCount("productModel", {
-    mainUserId: ObjectId(req.user.userId),
-    isDeleted: false,
-  });
+  // let count = await dbService.recordsCount("productModel", {
+  //   mainUserId: ObjectId(req.user.userId),
+  //   isDeleted: false,
+  // });
 
   let filter = {
     mainUserId: ObjectId(req.user.userId),
@@ -31,16 +30,18 @@ export const listProduct = async (req) => {
     filter,
     { sort: { productName: 1 }, limit: docLimit, skip: noOfDocSkip },
     {
+      _id:0,
       productName: 1,
       productSKU: 1,
       productType: 1,
       companyName: 1,
-      procuctPrice: 1,
+      productPrice: 1
     }
   );
 
-  return { productData, page: page, limit: limit, count: count };
-};
+  let products = productData.items
+  // console.log("products===>",products)
+}
 
 /************************** listProductWithAggregationWithfacet **********************/
 export const listProductWithAggregationWithfacet = async (req) => {
@@ -176,6 +177,8 @@ export const listProductWithAggregation = async (req) => {
     count: count,
   };
 };
+
+//********************* listProductWithPopulate ***********************//
 
 export const listProductWithPopulate = async (req) => {
   let { page = 1, limit = 0 } = req.body;

@@ -64,11 +64,11 @@ const handleMultipartData = multer({ fileFilter: imageFilter, limits: { fileSize
                     (error, result) => {
                         if (result && result.secure_url) {
                             req.body.image = result.secure_url;
-                            // next();
-                            res.json(req.body)
-                        } else {
+                            // res.json(req.body)
+                            next();
+                          } else {
                             res.send(error ? error.message : 'Image upload failed');
-                        }
+                          }
                     }
                 ).end(filePath);
     // cloudinary.v2.uploader.upload_stream(filePath,(error, result) => {

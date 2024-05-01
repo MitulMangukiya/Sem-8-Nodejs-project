@@ -8,7 +8,7 @@ const router = new Router();
 /**
  * @swagger
  * /api/v1/customer/delete:
- *  post:
+ *  delete:
  *   tags: ["Customer"]
  *   summary: delete customer.
  *   description: api used for delete customer information.

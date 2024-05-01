@@ -32,9 +32,9 @@ const findAllRecords = async (
   options = {},
   sort = { _id: -1 }
 ) => {
-  console.log("query====>",query);
-  console.log("options====>",options);
-  console.log("sort====>",sort);
+  // console.log("query====>",query);
+  // console.log("options====>",options);
+  // console.log("sort====>",sort);
   return await collections[modelName].find(query, options).sort(sort);
 };
 
@@ -86,7 +86,7 @@ const findManyRecordsWithPagination = async (
   };
 };
 
-export const updateBulkRecords = async (modelName, payload) => {
+const updateBulkRecords = async (modelName, payload) => {
   return new Promise(async function (resolve, reject) {
     collections[modelName]
       .bulkWrite(payload)
@@ -110,6 +110,7 @@ const findAllRecordsWithPopulate = async (
     .find(query, options)
     .populate(populateOptions);
 };
+
 const findLastRecord = async (modelName, query) => {
   return await collections[modelName].find(query).sort({ _id: -1 }).limit(1);
 };
@@ -132,7 +133,7 @@ const findManyRecordsWithPaginationAndPopulate = async (
       .populate(populateOptions),
     count: await collections[modelName].count(query),
     page,
-    limit: docLimit,
+    limit: docLimit,  
   };
 };
 

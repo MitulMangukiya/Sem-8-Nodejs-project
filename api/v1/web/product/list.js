@@ -1,11 +1,6 @@
-/**
- * This is Contain Save router/api.
- * @author Sandip Vaghasiya
- *
- */
  import { Router } from 'express';
  import commonResolver from '../../../../utilities/commonResolver'
- import { listProduct, listProductWithAggregation, listProductWithPopulate } from "../../../../services/product/listProduct";
+ import { listProductWithPopulate } from "../../../../services/product/listProduct";
  const router = new Router();
 
 /**
@@ -22,8 +17,6 @@
  *        schema:
  *         type: object
  *         properties:
- *           productType:
- *             type: string
  *           page:
  *             type: string
  *           limit:
